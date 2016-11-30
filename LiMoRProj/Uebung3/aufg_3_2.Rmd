@@ -29,7 +29,7 @@ No variance needed.
 
 b) Cov($\boldsymbol{\hat{\beta}}) = \sigma^2 \mathbf{(X X^{'}})^{-1}$. book p. 168. \textit{False}. When a model with correlation $(\mathbf{V} \neq \mathbf{I})$ is fitted via OLS, the covariance looks as follows: Var($\boldsymbol{\hat{\beta}}) = \sigma^2 \mathbf{(X'X})^{-1} \mathbf{X^{'} V X (X^{'} X)^{-1}}$. This is higher than the covariance, fitted via GLS
 
-c) $\boldsymbol{\hat{\beta}}$ is normally distributed. \textit{True}. $\beta = (\mathbf{X'X})^(-1) \mathbf{X'}y$ and $y \sim \mathcal{N}(\mathbf{X}\beta, \sigma^2 \mathbf{V}).$
+c) $\boldsymbol{\hat{\beta}}$ is normally distributed. \textit{True}. $\beta = (\mathbf{X'X})^{-1} \mathbf{X'}y$ and $y \sim \mathcal{N}(\mathbf{X}\beta, \sigma^2 \mathbf{V}).$
 
 
 d) $\boldsymbol{\hat{\beta}}$ is the best linear unbiased estimator of $\boldsymbol{\beta}.$ Book p. 165. \textit{False}. The BLUE for correlated $x_i$ is the generalized least squares estimator $\boldsymbol{\hat{\beta}}^{*} = (\mathbf{X^{'} V^{-1} X})^{-1} \mathbf{X^{'} V^{-1}} \mathbf{y}$. Although the estimation of $\boldsymbol{\hat{\beta}}$ is unbiased, the covariance is overestimated. The OLS estimator is thus inefficient -> Not BLUE.
