@@ -1,0 +1,44 @@
+---
+output:
+  pdf_document: default
+---
+## Ex 2
+
+Auf Buch S169:
+
+$$
+\begin{aligned}
+L(\beta, \sigma^2;x) &= \frac{1}{(2\pi)^{n/2}|\sigma^2V|^{\frac{1}{2}}}\exp\left(-\frac{(y - X\beta)'(\sigma^2V)^{-1}(y-X\beta)}{2}\right) \\
+&= \frac{1}{(2\pi\sigma^2)^{n/2}|V|^{\frac{1}{2}}}\exp\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right)
+\end{aligned}
+$$
+Herleitung für $\beta$:
+
+$$
+\begin{aligned}
+L(\beta; x) &= \frac{1}{(2\pi\sigma^2)^{n/2}|V|^{\frac{1}{2}}}\exp\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right) \\
+ &\propto \exp \left(-\frac{1}{2\sigma^2}(y - X\beta)'V^{-1}(y-X\beta)\right) \\
+ l(\beta, x) &= -\frac{1}{2\sigma^2}(y - X\beta)'V^{-1}(y-X\beta) \\
+  &= -\frac{1}{2\sigma^2}(y' - \beta'X')V^{-1}(y-X\beta) \\
+  &= -\frac{1}{2\sigma^2}(y'V^{-1} - \beta'X'V^{-1})(y-X\beta) \\
+  &= -\frac{1}{2\sigma^2}(yy'V^{-1} - \beta'X'V^{-1}y - \beta'X'V^{-1}y + \beta'X'V^{-1}X\beta) \overset{!}{=} 0\\
+  \frac{\partial(\beta;x)}{\partial\beta}&= -\frac{1}{2\sigma^2}( - 2X'V^{-1}y  + \beta'X'V^{-1}X\beta) \\
+  &\propto  - X'V^{-1}y  + \beta'X'V^{-1}X\beta \\
+  \hat{\beta} &= (X'V^{-1}X)^{-1}X'V^{-1}y
+\end{aligned}
+$$
+
+Herleitung für $\sigma^2$:
+
+$$
+\begin{aligned}
+L(\beta, \sigma^2;x) &= \frac{1}{(2\pi)^{n/2}|\sigma^2V|^{\frac{1}{2}}}\exp\left(-\frac{(y - X\beta)'(\sigma^2V)^{-1}(y-X\beta)}{2}\right) \\
+&= \frac{1}{(2\pi\sigma^2)^{n/2}|V|^{\frac{1}{2}}}\exp\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right) \\
+&= (2\pi)^{-n/2}(\sigma^2)^{-n/2}|V|^{-\frac{1}{2}}\exp\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right) \\
+&\propto (\sigma^2)^{-n/2}\exp\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right) \\
+l(\sigma^2;x) &= \frac{-n}{2}\log(\sigma^2)\left(-\frac{(y - X\beta)'V^{-1}(y-X\beta)}{2\sigma^2}\right) \\
+\frac{\partial(\sigma^2;x)}{\partial\sigma^2} &= \frac{-n}{2\sigma^2}\left(-\frac{2(y - X\beta)'V^{-1}(y-X\beta)}{(2\sigma^2)^2}\right) \overset{!}{=} 0 \\
+n &= \frac{(y - X\beta)'V^{-1}(y-X\beta)}{\sigma^2} \\
+\hat{\sigma}^2 &= \frac{1}{n}(y - X\beta)'V^{-1}(y-X\beta) \\
+\end{aligned}
+$$

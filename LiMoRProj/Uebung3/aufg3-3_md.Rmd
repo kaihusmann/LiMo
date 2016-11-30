@@ -1,0 +1,118 @@
+---
+title: "LiMo Sheet 3 Exercise 3"
+author: "St"
+date: "17 November 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### a)  
+\begin{equation}
+\hat{\beta}_{1} = \frac{s_{xy}}{s_{xx}} = \frac{Cov(x,y)}{Var(x)}
+\end{equation}
+Kovarianz und Varianz können aus $\hat{\Sigma}$ entnommen werden.
+\begin{equation}
+\Rightarrow \hat{\beta}_{1} = \frac{16.52447}{23.25701} = 0.71052 
+\end{equation}
+
+\begin{equation}
+\hat{\beta}_{0} = \bar{y} - \hat{\beta}_{1} * \bar{x} \Rightarrow \hat{\beta}_{0} = 70.67662 - 0.71052 * 178.9221 = -56.45111
+\end{equation}
+
+### b)  
+$SS_{Total}$  
+\begin{equation}
+Var(y) = \frac{1}{n-1} \sum \limits_{i=1}^n (y_{i}-\bar{y})^2 \Leftrightarrow \sum \limits_{i=1}^n (y_{i}-\bar{y})^2 = Var(y) * (n-1) \Rightarrow \sum \limits_{i=1}^n (y_{i}-\bar{y})^2 = 50.56418 * 76 = 3842.878
+\end{equation}
+
+$SS_{x}$  
+\begin{equation}
+Var(x) = \frac{1}{n-1} \sum \limits_{i=1}^n (x_{i}-\bar{x})^2 \Leftrightarrow \sum \limits_{i=1}^n (x_{i}-\bar{x})^2 = Var(x) * (n-1) \Rightarrow \sum \limits_{i=1}^n (x_{i}-\bar{x})^2 = 23.25701 * 76 = 1767.533
+\end{equation}
+
+$SS_{Regression}$  
+\begin{equation}
+\sum \limits_{i=1}^n (\hat{y}_{i}-\bar{y})^2 = \hat{\beta}_{1}^2 * \sum \limits_{i=1}^n (x_{i}-\bar{x})^2 \Rightarrow 0.5048325 * 1790.79 = 892.308
+\end{equation}
+
+\begin{equation}
+R^2 = \frac{\sum \limits_{i=1}^n (\hat{y}_{i}-\bar{y})^2}{\sum \limits_{i=1}^n (y_{i}-\bar{y})^2} \Rightarrow \frac{904.0489}{3893.442} = 0.2321979
+\end{equation}
+
+### Kontrolle/Alternative  
+
+\begin{equation}
+\rho = \frac{}{} = \frac{cov(x_{i}, y_{i})}{\sqrt{\sigma_{x}^2 \sigma_{y}^2}} \Rightarrow \frac{16.52447} {34.29244} = 0.4818691 \;\;\;\;  \rho^2 = 0.2321979 = R^2
+\end{equation}
+
+23 % der Streuung des Gewichts y können durch die Größe/Höhe x erklärt werden -> Moderate Anpassungsqualität.
+
+
+### c)   
+\begin{equation}
+\hat{Var}(\hat{\beta}_{1}) = \frac{\sigma^2} {\sum \limits_{i=1}^n (x_{i}-\bar{x})^2}
+\end{equation}
+
+$\sigma^2$ über  $SS_{Error}$ berechnen  
+\begin{equation}
+\sigma^2 = \frac {\sum \limits_{i=1}^n (y_{i}-\bar{y})^2 - \sum \limits_{i=1}^n (\hat{y}_{i}-\bar{y})^2} {n - 2} \Rightarrow \frac{2950.57} {75} = 39.34093
+\end{equation}
+
+Einsetzen  
+\begin{equation}
+\Rightarrow \hat{Var}(\hat{\beta}_{1}) = \frac{39.34093} {1767.533} = 0.02225754
+\end{equation}
+
+Konfidenzintervall berechnen
+
+\begin{equation}
+\hat{\beta}_{1} \pm t_{\alpha/2, n-2} \frac{s}{\sqrt{\sum \limits_{i=1}^n (x_{i} - \bar{x})^2}}
+\Rightarrow 0.7105157 \pm -1.992102 * 0.1491896
+\end{equation}
+
+Lower 0.4133147
+Upper 1.007717
+
+## R Code
+
+```{r sh3ex3}
+# Sheet3_Exercise3 -----------------------------------------------------------------
+Sigma <- matrix(c(23.25701, 16.52447, 16.52447, 50.56418), nrow = 2, ncol = 2)
+
+n <- 77
+barX <-  178.9221
+barY <- 70.67662
+
+#-- a)
+(beta1 <- Sigma[1,2] / Sigma[1,1])
+(beta0 <- barY - beta1 * barX)
+
+#-- b)
+# SS_Total
+SSt <- Sigma[2,2] * (n - 1)
+
+# SS_Regression
+SSr <- Sigma[1,1] * (n-1) * beta1^2
+
+(R2 <- SSr / SSt)
+
+# Kontrolle, Alternative
+rho <- Sigma[1,2] / sqrt(Sigma[1,1] * Sigma[2,2])
+rho^2 == R2
+
+# SS_Error
+SSe <- SSt - SSr
+
+# \sigma^2
+sigma2 <- SSe / (n-2)
+(varBeta1 <- sigma2 / (Sigma[1,1] * (n - 1)))
+
+# CI
+(beta1 + qt(0.025, n-2) * sqrt(varBeta1))
+(beta1 - qt(0.025, n-2) * sqrt(varBeta1))
+
+```
+

@@ -1,0 +1,81 @@
+---
+title: "LiMo WiSe 16/17 Sh4 Ex5"
+author: "Christoph Stiehm"
+date: "16 11 2016"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 5a) How many observations did we use?
+
+n = 76 (Calculate with DF = 73 or by utilizing Adjusted R-squared from output $R^2(adj) = 1 - \frac{n-1}{n-k-1} (1-R^2)$)
+
+## 5b) Fill in the missing values.
+
+t-value for x calculated as absolute value of ratio of estimate and standard error, here 0.45842/0.12677  
+
+p-Values
+```{r}
+pt(0.74669 / 0.24922, 73, lower = F) * 2
+pt(abs(-0.45842/ 0.12677), 73, lower = F) * 2
+pt(0.02796/0.01255, 73, lower = F) * 2
+```
+
+Coefficients
+
+Covariate   | t value | p Value
+----------- | ------- | ---------
+(Intercept) | 2.996   | 0.003733
+x           | 3.616   | 0.000547
+x²          | 2.227   | 0.02900
+
+#### F-statistic
+
+##### Variant 1
+$F = \frac{R^{2} * (n-k-1)} {(1 - R^{2}) * k} \Rightarrow F = \frac{0.3383 * (76-2-1)} {(1 - 0.3383) * 2}$ 
+$\Leftrightarrow F = 18.66095$
+
+Control 
+(p-Value given in output)
+```{r}
+pf(18.66095, 2, 73, lower.tail = F)
+```
+
+##### Variant 2
+Calculate $SS_{Error}$, RSE taken from Output
+$RSE = \sqrt{\frac{SS_{Error}} {n - k - 1}} \Rightarrow 0.9343 = \sqrt{\frac{SS_{Error}} {73}} \Leftrightarrow SS_{Error} =  63.7229$  
+
+Calculate $SS_{Total}$  
+$SS_{Total} = \frac{SS_{Error}} {1 - R^2} \Rightarrow SS_{Total} = \frac{63.7229} {1 - 0.3383} \Leftrightarrow SS_{Total} = 96.3018$  
+
+Calculate $SS_{Regression}$  
+$SS_{Regression} = SS_{Total} - SS_{Error} \Rightarrow SS_{Regression} = 32.5789$
+
+Calculate $MS_{Regression}$ and  $MS_{Error}$  
+$MS_{Regression} = \frac{SS_{Regression}}{k} \Rightarrow MS_{Regression} = 16.28945$  
+$MS_{Error} = \frac{SS_{Error}}{n-k-1} \Rightarrow MS_{Error} = 0.8729164$
+
+Calculate F statistic 
+$F = \frac{MS_{Regression}}{MS_{Error}} \Rightarrow F = 18.66095$
+
+Conforms with value from Variant 1 therefore fits the p-Value as well.
+
+## 5c) Test the overall regression hypothesis (significance level 1%).
+
+p-Value in Output, 2.841e-07 < 0.01, we reject $H_{0}: \pmb{\beta}_{1} = 0$, at least one of $\beta_{1}$ or 
+$\beta_{2}$ ist not zero.
+
+## 5d) Can we reject (at 5% significance level) the hypothesis that the regression function goes through the origin?
+Yes. p-Value for Intercept 0.003733 < 0.05, Intercept is not zero. 
+
+Control via CI  
+$\beta_{0} \pm t_{0.975, n-k-1} SE_{\beta_{0}}$  
+Upper  
+$\Rightarrow 0.74669 + 1.992997 * 0.24922 = 1.243385$   
+Lower  
+$\Rightarrow 0.74669 - 1.992997 * 0.24922 = 0.2499953$  

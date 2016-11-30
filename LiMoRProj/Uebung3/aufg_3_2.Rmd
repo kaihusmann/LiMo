@@ -1,0 +1,37 @@
+---
+title: "Study sheet 3, Exercise 2"
+author: "Kai Husmann"
+date: "9 November 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Consider a multiple linear regression model
+$$ y_i = \beta_0 + \beta_1 x_{i1} + ... + \beta_p x_{ip} + \varepsilon_i, i = 1, ..., n$$
+$\varepsilon \sim \mathcal{N}_n (\mathbf{0}, \sigma^2 \mathbf{V})$, where $\varepsilon = (\varepsilon_1, ..., \varepsilon_n)^T, \mathbf{V} \neq \mathbf{I}_n$  is a known positive definite matrix and the design matrix $\mathbf{X}$ is of full column rank. Consider the ordinary least squares estimator
+$\boldsymbol{\hat{\beta}} = (\mathbf{X X^{'}})^{-1} \mathbf{X}^{T} \mathbf{y}$  of the regression coefficients. Decide whether the following statements are
+true or false (in general, without any further assumptions imposed on $\mathbf{V}$ and $\mathbf{X}$):
+
+a) $\boldsymbol{\hat{\beta}}$ is an unbiased estimator of $\boldsymbol{\beta}.$ Book p. 168. \textit{True}. $\boldsymbol{\hat{\beta}}$ is an unbiased for uncorrelated covariates (proof see p. 145) as well as for correlated covariates.
+$$
+\begin{aligned}
+\text{E}(y) &= \mathbf{X}\beta \\
+\text{E}(\beta) &= \text{E}((\mathbf{X'X})^{-1} \mathbf{X'}y)\\
+&= (\textbf{X'X})^{-1} \mathbf{X'X} \beta
+&= \beta
+\end{aligned}
+$$
+No variance needed.
+
+b) Cov($\boldsymbol{\hat{\beta}}) = \sigma^2 \mathbf{(X X^{'}})^{-1}$. book p. 168. \textit{False}. When a model with correlation $(\mathbf{V} \neq \mathbf{I})$ is fitted via OLS, the covariance looks as follows: Var($\boldsymbol{\hat{\beta}}) = \sigma^2 \mathbf{(X'X})^{-1} \mathbf{X^{'} V X (X^{'} X)^{-1}}$. This is higher than the covariance, fitted via GLS
+
+c) $\boldsymbol{\hat{\beta}}$ is normally distributed. \textit{True}. $\beta = (\mathbf{X'X})^(-1) \mathbf{X'}y$ and $y \sim \mathcal{N}(\mathbf{X}\beta, \sigma^2 \mathbf{V}).$
+
+
+d) $\boldsymbol{\hat{\beta}}$ is the best linear unbiased estimator of $\boldsymbol{\beta}.$ Book p. 165. \textit{False}. The BLUE for correlated $x_i$ is the generalized least squares estimator $\boldsymbol{\hat{\beta}}^{*} = (\mathbf{X^{'} V^{-1} X})^{-1} \mathbf{X^{'} V^{-1}} \mathbf{y}$. Although the estimation of $\boldsymbol{\hat{\beta}}$ is unbiased, the covariance is overestimated. The OLS estimator is thus inefficient -> Not BLUE.
+
+

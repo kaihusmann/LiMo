@@ -1,0 +1,36 @@
+---
+title: "Study sheet 3, Exercise 1"
+author: "?"
+date: "10 November 2016"
+output: pdf_document
+---
+
+## Ex 1
+
+Gegeben
+
+- A1: $E[\epsilon_i] = 0$ oder $E[y] = X\beta$
+- A2: $Var[\epsilon_i] = \sigma^2$ 
+- A3: $Cov[\epsilon_i, \epsilon_j] = 0$ for $i \ne j$
+- A4: $\mathbf{\epsilon} = (\epsilon_1, \dots, \epsilon_n)'$ ist multivariatnormal verteilt.
+
+### a  
+A1 = Minimale Voraussetzung.
+
+### b
+A2 und A3.
+$$
+\begin{aligned}
+Var(\varepsilon_i)  &= \sigma^2; \quad Cov(\varepsilon_i, \varepsilon_j) = 0\\
+Var(\hat{\beta}) &= \sigma^2I; \quad Var(y)= \sigma^2 \\
+Var(\hat{\beta})&=(\mathbf{X'X})^{-1} \mathbf{X'} \sigma^2 \mathbf{I X(X'X)^{-1}}\\
+ &= \sigma^2(X'X)^{-1}
+\end{aligned}
+$$
+
+
+### c
+A1, A2 und A3: Gauß-Markov-Theorem.
+
+### d
+A1, A2, A3 und A4.
