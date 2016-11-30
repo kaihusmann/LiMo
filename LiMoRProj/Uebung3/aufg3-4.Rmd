@@ -1,0 +1,53 @@
+---
+title: "Sheet 3 Exercise 4"
+author: "Kai"
+date: "9 November 2016"
+output: pdf_document
+---
+The formula in matrix notation:
+\begin{equation}
+ \begin{pmatrix}
+  y_{1} \\
+  y_{2} \\
+  \vdots \\
+  y_{30}
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+  1 & x_{1,1} & \cdots & x_{1,5} \\
+  1 & a_{2,1} & \cdots & x_{2,5} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  1 & a_{30,1} & \cdots & x_{30,5} 
+ \end{pmatrix}
+ \begin{pmatrix}
+  \beta_{0} \\
+  \vdots \\
+  \beta_{5}
+ \end{pmatrix}
+ +
+ \begin{pmatrix}
+  \varepsilon_{1} \\
+  \varepsilon_{2} \\
+  \vdots \\
+  \varepsilon_{30}
+ \end{pmatrix}
+ \end{equation}
+
+\begin{table}[]
+\centering
+\caption{}
+\label{my-label}
+\begin{tabular}{clcclcc}
+\multicolumn{1}{l}{} &                      & \multicolumn{2}{l}{with intercept}                                                                                                                           &                      & \multicolumn{2}{l}{without intercept}                                                                                          \\
+\multicolumn{1}{l}{} &                      & \multicolumn{1}{l|}{Dimension}                                                       & \multicolumn{1}{l}{Rank}                                              &                      & \multicolumn{1}{l|}{Dimension}                                                 & \multicolumn{1}{l}{Rank}                      \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+Y                    &                      & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 1\\ (n x 1)\end{tabular}}        & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular}                         &                      & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}30 x 1\\ (n x 1)\end{tabular}}  & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular} \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+X                    &                      & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 6\\ (n x (p+1))\end{tabular}}    & \begin{tabular}[c]{@{}c@{}}6\\ p+1\end{tabular}                       &                      & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 5\\ n x p\end{tabular}}    & \begin{tabular}[c]{@{}c@{}}5\\ p\end{tabular} \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+$\beta$              & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}6 x 1\\ ((p+1) x 1)\end{tabular}}     & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular}                         & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}5 x 1\\ p x 1\end{tabular}}     & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular} \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+$\varepsilon$        & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 1\\ (n x 1)\end{tabular}}        & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular}                         & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 1\\ (n x 1)\end{tabular}}  & \begin{tabular}[c]{@{}c@{}}1\\ 1\end{tabular} \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+$(X'X)$              & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}6 x 6\\ ((p+1) x (p+1))\end{tabular}} & \begin{tabular}[c]{@{}c@{}}6\\ p+1\textasciicircum \{*\}\end{tabular} & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}5 x 5\\ (p x p)\end{tabular}}   & \begin{tabular}[c]{@{}c@{}}5\\ p\end{tabular} \\ \cline{1-1} \cline{3-4} \cline{6-7} 
+$X(X'X)^{-1}X'$      & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 30\\ (n x n)\end{tabular}}       & \begin{tabular}[c]{@{}c@{}}5\\ p+1\textasciicircum \{+\}\end{tabular} & \multicolumn{1}{c}{} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}30 x 30\\ (n x n)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}6\\ p\end{tabular}
+\end{tabular}
+\end{table}
+
+*: $rank(A'A)-rank(AA')=rank(A)$ \newline
++: $X(X'X)^{-1}X'=H, rank(H)=trace(H)=trace(X'X(X'X)^{-1}I)=trace(I (p-1))=p+1$
