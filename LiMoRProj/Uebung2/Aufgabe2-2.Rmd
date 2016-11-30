@@ -1,0 +1,90 @@
+---
+title: "Study sheet 2, Exercise 2"
+author: "Kai Husmann"
+date: "10 November 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+In some applications of simple linear regression a model without an intercept is required
+(when the data are such that the line must go through the origin), that is, a model of the
+form
+$$y_{i}={\beta}x_{i}+\varepsilon_{i}, i = 1,...,n$$
+$$ \text{E}(\varepsilon_{i}=0), \text{Var}(\varepsilon_{i}=\sigma^2),\text{i.i.d.}$$
+
+# a)
+Derive the least squares estimator for $\beta$. Book page 128, lecture 26.10.
+$$\boldsymbol{\hat{\varepsilon}'\hat{\varepsilon}} = \sum_{i=1}^n \varepsilon_{i}^2 = \sum_{i=1}^n(y_{i}-\hat{y_{i}})^2 = \sum_{i=1}^n(y_{i}-\beta x_{i})^2$$
+
+$$
+\begin{aligned}
+\frac{\partial \boldsymbol{\hat{\varepsilon}'\hat{\varepsilon}}}{\partial \beta} &= -2 \sum_{i=1}^n(y_{i}-\beta x_{i})x_i = 0\\
+&\propto \sum_{i=1}^n(y_{i}-\beta x_{i})x_i = 0\\
+&= \sum_{i=1}^n x_i y_i - \beta \sum_{i=1}^n x_i^2 \\
+\beta \sum_{i=1}^n x_i^2 &= \sum_{i=1}^n x_i y_i \\
+\beta &= \frac{\sum_{i=1}^n x_i y_i}{\sum_{i=1}^n x_i^2} \\
+\end{aligned}
+$$
+
+# b)
+Let $\tilde{\beta}=\frac{1}{\sum_{i=1}^n x_i} \sum_{i=1}^n y_i$, $\breve{\beta} = \frac{1}{n} \sum_{i=1}^n \frac{y_i}{x_i}$ with $x_i \ne 0$ be two estimators of $\beta$. \newline \newline
+Is $\tilde{\beta}$ unbiased? Book p. 131, lecture 26.10.
+
+$$
+\begin{aligned}
+\text{E}(\tilde{\beta})&=\text{E}(\frac{1}{\sum_{i=1}^n x_i} \sum_{i=1}^n y_i) \\
+&=\text{E}(\frac{1}{\sum_{i=1}^n x_i}) \text{E}(\sum_{i=1}^n y_i) \\
+&=\frac{1}{\sum_{i=1}^n x_i} \sum_{i=1}^n \text{E}(y_i) \\
+&=\frac{\text{E}(y_i)}{\sum_{i=1}^n x_i} \\
+&=\frac{\beta \sum_{i=1}^n x_i}{\sum_{i=1}^n x_i} \\
+&=\beta \frac{\sum_{i=1}^n x_i}{\sum_{i=1}^n x_i} \\
+&=\beta
+\end{aligned}
+$$
+
+Is $\breve{\beta}$ unbiased?
+
+$$
+\begin{aligned}
+\text{E}(\breve{\beta}) &= \text{E}(\frac{1}{n} \sum_{i=1}^n \frac{y_i}{x_i}) \\
+&= \frac{1}{n} \sum_{i=1}^n \frac{\text{E}(y_i)}{x_i} \\
+&= \frac{1}{n} \sum_{i=1}^n \frac{x_i \beta}{x_i} \\
+&= \frac{1}{n} n \beta = \beta
+\end{aligned}
+$$
+
+
+# c)
+
+The **R** package \texttt{gamair}, \texttt{data(hubble)} contains data from the Hubble space telescope on distances and velocities of 24 galaxies (see also \texttt{?hubble}). Fit the following simple linear regression model without intercept to the data: 
+$$ velocity=\beta_{1} distance + \varepsilon  $$
+This is essentially what astronomers call Hubble’s Law and $\beta_{1}$ is known as Hubble’s constant. We can use the estimated value of $\beta_{1}$ to find an approximate value for the age of the universe.
+
+## Data structure
+```{r}
+library(gamair)
+data(hubble)
+summary(hubble)
+```
+
+## Linear regression
+```{r}
+linreg <- lm(y ~ x -1, data = hubble)
+summary(linreg)
+```
+
+
+
+```{r pressure, echo=FALSE}
+plot(hubble$y ~ hubble$x, xlab = 'Distance [Mega parasec]', ylab = 'Velocity [km / sec.]', axes = F)
+axis(1, lwd = 0, lwd.ticks = 1)
+axis(2, las = 2, lwd = 0, lwd.ticks = 1)
+box()
+abline(a = c(0, linreg$coefficients))
+```
+
+## Age of the universe
+The estimated coefficient for the velocity of the galaxy as a function of it´s distance $\beta_{1}$ is 76.58 [km/(sMpc)]. As 1 pc is 3.09e13 km, the age of the universe $t_{H}$ is calculated as
+$$t_{H}[s]=\frac{1}{\beta_{1}}=\frac{1}{76.68 [km/sMpc]}=4.03*10^{17}[s]=12.8 \text{ billion years} $$
