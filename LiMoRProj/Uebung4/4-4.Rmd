@@ -1,0 +1,86 @@
+---
+title: "LiMo WiSe 16/17 Sheet 4: Ex 4"
+output:
+  pdf_document: default
+---
+
+# Task:
+
+
+Let $x = (x_1, \dots , x_n)'$ be a random vector with $x_i \overset{iid}{\sim} N(\mu, \sigma^2)$ for $i = 1, \dots, n$ and $\mu$ is
+known. The parameter $\sigma^2$ should be estimated. Look at the estimator
+
+$$
+T = T(x) = \sum_{i = 1}^n(x_i- \mu)^2
+$$
+
+Is $T$ sufficient for $\sigma^2$?
+
+# Solution:
+
+## Background
+
+A statistic $T(x)$ is sufficient for a parameter $\theta$ if $f(x|T(x) = t, \theta) = f(x|T(x) = t)$. That means, $x|T(x) = t$ does not depend on $\theta$. Or, all information is contained in the statistic. Equivalently we can use the factorization theorem:
+
+$$
+f(x|\theta) = h(x) \cdot g(T(x)|\theta)
+$$
+
+Note that, 
+
+- $h(x)$ does not depend on the parameter
+- $g(T(x)|\theta)$ depends via the statistic on the parameter
+
+## Answer
+
+$$
+\begin{aligned}
+T(x) &= \sum_{i = 1}^n (x_i - \mu)^2 \\
+f(x|\sigma^2) &\overset{iid}{=} \prod_{i = 1}^{n}\frac{1}{\sqrt{2\pi}\sigma}\exp\left(\frac{1}{2\sigma^2}(x_i - \mu)^2\right)\\
+&= \underbrace{\sigma^{-n} \exp\left(\frac{1}{2\sigma^2}\sum_{i = 1}^n(x_i - \mu)^2\right)}_{=g(T(x)|\sigma^2)}
+\underbrace{(2\pi)^{-\frac{n}{2}}}_{=h(x)}
+\end{aligned}
+$$
+
+According to the factorization theorem $T(x)$ is sufficient for $\sigma^2$.
+
+## More examples (not from the sheet)
+
+### Exponential distribution
+
+Let $x = (x_1, \dots, x_n) \overset{iid}{=}Exp(\lambda)$ and $T(x) = \sum_{i = 1}^nx_i$. Is $T(x)$ sufficient for $\lambda$?
+
+$$
+\begin{aligned}
+T(x) &= \sum_{i = 1}^n x_i  \\
+f(x|\lambda) &\overset{iid}{=} \prod_{i = 1}^{n} f(x_i|\lambda)\\
+&= \underbrace{\lambda^n\exp(-\lambda\sum x_i)}_{=g(T(x)|\sigma^2)}
+\underbrace{(1)}_{=h(x)}
+\end{aligned}
+$$
+
+$T(x)$ is sufficient.
+
+### Binomial distribution
+
+Let $x_i \overset{iid}{\sim}Bin(1, p)$, $i = 1, \dots, 4$; are $T(x) = \sum_{i = 1}^nx_i$ and $\tilde{T}(x) = x_1$ sufficient on $p$?
+
+#### For $T(x)$:
+
+$$
+\begin{aligned}
+p((1, 1, 0, 1)) &= pp(1-p)p \\
+p((1, 1, 0, 1)|T(x) = 3) &= \frac{1}{\binom{4}{3}} = \frac{1}{4} \\
+\end{aligned}
+$$
+
+$x|T(x)$ does not depend on $p$ and is hence sufficient.
+
+### For $\tilde{T}(x)$:
+$$
+\begin{aligned}
+p((1, 1, 0, 1)) &= pp(1-p)p \\
+p((1, 1, 0, 1)|\tilde{T}(x) = 1) &= p(1-p)p\\
+\end{aligned}
+$$
+$x|\tilde{T}(x)$ depends on $p$ and is not sufficient.
