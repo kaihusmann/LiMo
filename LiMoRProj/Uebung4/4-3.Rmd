@@ -1,0 +1,40 @@
+---
+title: S4-2"
+author: "Kai"
+date: "23 Dezember 2016"
+output: pdf_document
+---
+
+## a) (i) $H_0$: $\beta_1=0$; $\beta_2=0$; $\beta_3=0$
+
+$$
+\mathbf{C} = 
+\begin{pmatrix}
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\
+\end{pmatrix};
+\mathbf{t} = 
+\begin{pmatrix}
+0 \\
+0 \\
+0 \\
+\end{pmatrix};
+\boldsymbol{\beta} = 
+\begin{pmatrix}
+\beta_0\\
+\beta_1\\
+\beta_2\\
+\beta_3\\
+\end{pmatrix}
+$$
+
+## b) 
+Hypothesis i, Test of overall regression $\rightarrow$ The F-Test.
+
+## c)
+The estimator under $H_0$: 
+$$
+\hat{\beta_c} = \hat{\beta}-(X'X)^{-1}C'[C(X'X)^{-1}C']^{-1}(C \hat{\beta}-t)
+$$
+Solution via R. See markdown file on LiMo homepage.

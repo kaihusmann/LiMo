@@ -1,0 +1,10 @@
+---
+title: "6-2"
+author: "Kai"
+date: "23 Dezember 2016"
+output: pdf_document
+---
+## a)
+$$
+P(\gamma) = \frac{\sigma^2}
+$$

@@ -1,0 +1,42 @@
+---
+title: "4-1"
+author: "Kai"
+date: "23 Dezember 2016"
+output: pdf_document
+---
+
+$$
+\begin{aligned}
+s^2 &= \underbrace{(y-X\beta)'(y-X\hat{\beta})}_{SSE} / (n-K-1)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+SEE &= y'(I-X(X'X)^{-1}X')y\\
+E(SEE) &= (tr(I-X(X'X)^{-1}X')\sigma^2 V)+E(y')(I-X(X'X)^{-1}X')E(y)\\
+&= \sigma^2 tr(V-X(X'X)^{-1}X'V)+\underbrace{\beta'X'(I-X(X'X)^{-1}X')X\beta}_{=0}\\
+&= \sigma^2(tr(V)-tr(X(X'X)^{-1}X'V))\\
+&= \sigma^2(tr((1-\rho)I_n+\rho 1_n 1_n')-tr(X(X'X)^{-1}X'((1-\rho)I_n+\rho 1_n 1_n')))\\
+&=\sigma^2((1-\rho)n+\rho n - (1-\rho)(K+1)+ \underbrace{\rho tr(X(X'X)^{-1}X'-1_n1_n')}_{non-singular})\\
+&=\sigma^2((1-\rho)n+\rho n - (1-\rho)(K+1)+ \rho tr(X(X'X)^{-1}X'X(X'X)^{-1}-I))\\
+&=\sigma^2((1-\rho)n+\rho n - (1-\rho)(K+1)+ \rho tr(HH^{-1}I))\\
+&=\sigma^2((1-\rho)n+\rho n - (1-\rho)(K+1)+ \rho tr(I))\\
+&=\sigma^2((1-\rho)n+\rho n - (1-\rho)(K+1)+ \rho n\\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+E(s^2) &= \frac{\sigma^2(n-K-1)(1-\rho)}{n-K-1}\\
+&= \sigma^2(1-\rho)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+Cov(y) &= \sigma^2V; V = (1-\rho)I_n+\rho 1_n 1_n'
+\end{aligned}
+$$
+
+The covariance structure implies the same positive correlation $\rho$ between any two observations and the same variance for all observations.
