@@ -1,0 +1,32 @@
+---
+title: "LiMo WiSe 16/17 Sheet 7: Ex 3"
+output:
+  pdf_document: default
+---
+
+# Task:
+
+Let $x = (x_1, \dots, x_n)$T be a random vector with $xi \overset{iid}{\sim} Po(\lambda)$ for $i = 1, \dots, n$. The parameter
+$\lambda$ should be estimated. Look at the estimator
+
+$$
+T  = T(X) = \sum_{i = 1}^nx_i.
+$$
+
+Is $T$ sufficient for $\lambda$? Justify your answer.
+
+
+
+# Solution:
+
+$$
+\begin{aligned}
+T(x) &= \sum_{i = 1}^n (x_i - \mu)^2 \\
+f(x|\lambda) &= \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i!}\exp(-\lambda) \\
+&= \frac{\lambda^{\sum_{i = 1}^nx_i}}{\prod_{i = 1}^nx_i!}\exp(-\lambda n) \\
+&= \underbrace{\lambda^{\sum_{i = 1}^nx_i}\exp(-\lambda n)}_{g(T(x), \lambda)} \underbrace{\frac{1}{\prod_{i = 1}^n x_i!}}_{h(\lambda)}
+\end{aligned}
+$$
+
+According to the factorization theorem (of Fisher-Neymann) $T(x)$ is sufficient in $\lambda$.
+
