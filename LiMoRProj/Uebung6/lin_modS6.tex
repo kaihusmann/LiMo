@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\textbf{Sheet 6}\\
+Sabastian \& Kai\\
+(Die Zusatzaufgabe Sheet 4 letzter Woche könnte in der Klausur dran kommen.)\\
+
+\textbf{1a}\\
+See the markdown file on LiMo Homepage. The example ist only for expanation of Bayer inference. The procedure is often not possible because the posterior is often unknown/not calculatable.\\
+
+
+\textbf{2a}\\
+\begin{align*}
+P(\tau) &= \frac{\delta^{\alpha}}{\Gamma(\alpha)} \tau^{\alpha-1} \exp(-\delta \tau)\\
+\text{where} \quad \Gamma(\alpha) &= \int^\infty_{0} x^{\alpha-1} \exp(-x) dx \\
+\thinspace \\
+P(\tau) &= \int_0^\infty \frac{\delta^{\alpha}}{\Gamma(\alpha)} \tau^{\alpha-1} \exp(-\delta \tau) d \tau\\
+&= \frac{1}{\Gamma(\alpha)} \int_0^\infty \delta^{\alpha} \tau^{\alpha-1} \exp(-\delta \tau) d \tau\\
+&\propto  \int_0^\infty \delta^{\alpha} \tau^{\alpha-1} \exp(-\delta \tau) d \tau\\
+&=  \int_0^\infty (\delta \tau)^{\alpha} \tau^{-1} \exp(-\delta \tau) d \tau && \mu = \tau \delta \text{;}\quad \frac{d \tau}{d \mu}=\frac{1}{\delta}\\
+&= \int_0^\infty \mu^\alpha \left( \frac{\mu}{\delta} \right)^{-1} exp(-\mu) \frac{1}{\delta} d\mu\\
+&= \int_0^\infty \mu^{\alpha} \mu^{-1} \exp(-\mu) d\mu\\
+&= \int_0^\infty \mu^{\alpha - 1} \exp(-\mu) d\mu && \text{Dies ist die Gamma Funktion.}\\
+& \text{Mit dem zuvor ausgelassenem Term ergibt sich also:}\\
+&=\frac{1}{\Gamma(\alpha)}\Gamma(\alpha)\\
+&= 1
+\end{align*}
+
+Funktioniert, da $\tau \ge 0$, $\delta > 0$, $\alpha > 0$ and $\Gamma(\alpha)>0$ $\rightarrow$ $p(\tau) \ge 0$\\
+\newpage
+
+\textbf{2b}\\
+\begin{align*}
+E(\tau) &= \int_0^\infty p(\tau) d \tau \\
+&= \int_0^\infty \frac{\delta^{\alpha}}{\Gamma(\alpha)} \tau^{\alpha-1} \exp(- \delta \tau) d \tau \\
+&= \frac{1}{\Gamma(\alpha)} \int_0^\infty (\delta \tau)^{\alpha} \exp(- \delta \tau) d \tau && \mu=\tau \delta\\
+&= \frac{1}{\Gamma(\alpha)} \int_0^\infty (\mu)^{\alpha} \exp(- \mu) \frac{1}{\delta} d \mu \\        
+&= \frac{1}{\Gamma(\alpha)} \frac{1}{\delta} \int_0^\infty (\mu)^{\alpha} \exp(- \mu) d \mu && \text{dies ist wieder so aehnlich wie die Gamma Funktion (fehlt ein -)}\\
+&= \frac{1}{\Gamma(\alpha)} \frac{1}{\delta} \Gamma(\alpha+1)\\
+&= \frac{\alpha}{\delta}
+\end{align*}
+
+\begin{align*}
+Var(\tau)&= \int_0^\infty \tau^2 \frac{\delta^\alpha}{\Gamma(\alpha)} \tau^{\alpha-1} exp(-\delta \tau) - (\frac{\alpha}{\delta})^2 && \text{Verschiebungssatz} \\
+&= \frac{\delta^\alpha}{\Gamma(\alpha)} \int_0^\infty \tau^{\alpha+1} exp(-\delta \tau) - (\frac{\alpha}{\delta})^2 && \text{Schritt unklar, Gamma Funktion??}\\
+&= \frac{\delta^\alpha}{\Gamma(\alpha)} \delta^{-(\alpha+2)}\Gamma(\alpha+2)-(\frac{\alpha}{\delta})^2\\
+&= \frac{\delta^{\alpha-2}}{\Gamma(\alpha)} \Gamma(\alpha+2)-(\frac{\alpha^2}{\delta^2}) & \Gamma(\alpha+1) &= \alpha \Gamma(\alpha)\text{;} \quad \Gamma(\alpha+2) = (\alpha+1)\alpha \Gamma(\alpha)\\
+&=\frac{(\alpha+1)\alpha}{\delta^2}-\frac{\alpha^2}{\gamma^2}\\
+&=\frac{\alpha}{\delta^2}\\
+\end{align*}
+
+\textbf{3}
+\begin{align*}
+y &= X\beta + \epsilon \\
+\epsilon &\sim N_p(0, \sigma^2 I) \\
+\beta &= (\beta_1, \hdots, \beta_p)' \\
+\sigma^2 \sim IG(a,b)
+\end{align*}
+
+a) posterior disribution of $\sigma^2$
+\begin{align*}
+p(\sigma^2 | y,X,\beta) &= f(y|X, \beta, \sigma^2) p(\sigma^2) \\ 
+f(y|X, \beta, \sigma^2) &= \frac{1}{(2 \pi)^{p/2} det(I \sigma^2)^{1/2}} 
+\exp(-\frac{1}{2}(y-X\beta)' (I \sigma^2)^{-1} (y-X\beta))  \\
+&\propto \frac{1}{ \sqrt{ (\sigma^2)^n det(I }} 
+\exp(-\frac{1}{2}(y-X\beta)' (I \sigma^2)^{-1} (y-X\beta))  \\
+&\propto \frac{1}{ (\sigma^2)^{n/2} } 
+\exp(-\frac{1}{2}(y-X\beta)' (I \sigma^2)^{-1} (y-X\beta))  
+\end{align*}
+
+Prior
+\begin{align*}
+p(\sigma^2)  &= \frac{b^a}{\Gamma(a)} (\sigma^2)^{-(a+1)} \exp(-b/\sigma^2)  \\
+&\propto  (\sigma^2)^{-(a+1)} \exp(-b/\sigma^2)  
+\end{align*}
+
+\begin{align*}
+p(\sigma^2 | y,X,\beta) &\propto \frac{1}{ (\sigma^2)^{n/2} } 
+\exp(-\frac{1}{2}(y-X\beta)' (I \sigma^2)^{-1} (y-X\beta))  (\sigma^2)^{-(a+1)} \exp(-b/\sigma^2)  \\
+&= (\sigma^2)^{-(a+1+n/2)} \exp(-\frac{1}{\sigma^2}(\frac{1}{2}(y-X\beta)' (y-X\beta) + b)) 
+\end{align*}
+
+\begin{align*}
+\sigma^2 | y,X,\beta \sim IG(a+n/2, \frac{1}{2}(y-X\beta)' (y-X\beta) + b)
+\end{align*}
+
+\textbf{b}
+flat prior = non informative prior
+we get flat priors if the IG distribution is constant. Thus the prior is flat for the values
+
+$b=0, a=-1 p(\sigma^2) = const$
+
+\begin{align*}
+p(\sigma^2)  &\propto  (\sigma^2)^{-(a+1)} \exp(-b/\sigma^2)  
+\end{align*}
+
+\textbf{c}
+\begin{align*}
+\hat{\sigma}^2 = \frac{b_{post}}{a_{post}+1} = \frac{\frac{1}{2}(y-X\beta)' (y-X\beta) + b}{a+n/2+1}
+\end{align*}
+
+fuer $b=0, a=-1$ 
+\begin{align*}
+\hat{\sigma}^2 = \frac{\frac{1}{2}(y-X\beta)' (y-X\beta)}{n/2} = \frac{1}{n} (y-X\beta)' (y-X\beta) = \hat{\sigma}_{ML}^2
+\end{align*}
+
+\textbf{4}
+\begin{align*}
+y \sim Po(\lambda) \\
+f(y|\lambda) = \frac{\lambda^y_i}{y_i!}\exp(-\lambda)
+\end{align*}
+
+Likelihood
+\begin{align*}
+L(y|\lambda) = \prod_i f(y_i|\lambda) = \prod_i \frac{\lambda^y_i}{y_i!}\exp(-\lambda) \\
+=  \frac{1}{\prod_i y_i!} \lambda^{\sum_i y_i} \exp(-n \lambda)
+\end{align*}
+
+Prior (Gamma Verteilung)
+\begin{align*}
+p(\lambda)  &= \frac{b^a}{\Gamma(a)} (\lambda^2)^{-(a+1)} \exp(-b/\lambda)  \\
+&\propto  (\sigma^2)^{a-1} \exp(-b\sigma^2)  
+\end{align*}
+
+Posterior
+\begin{align*}
+p(\lambda | y) &\propto f(y|\lambda) p(\lambda)  \\
+&\propto \lambda{\sum_i y_i} \exp(-n \lambda) \lambda^{a-1} \exp(-b \lambda) \\
+&= \lambda{ a + \sum_i y_i -1 } \exp(-(b+n)\lambda)
+\end{align*}
+
+\begin{align*}
+\lambda | y \sim Ga(a + \sum_i y_i, b+n)
+\end{align*}
+
+Konjugierte Verteilung, da der Kern der Post.-Verteilung wieder einer Gamma Vertielung entspricht.\\
+$p(\lambda | y)$ hat die Form einer Gamma Verteilung mit $a=a+\sum y_i4$ und $b=b+n$, also $\lambda(y  \sim Ga(a+\sum y_i, b+n) )$\\
+
+\textbf{5} R. There was a mistake in an early version of the sheet in b.\\
+\newpage
+\textbf{6} see page 284\\
+
+\begin{align*}
+u(\tau | y) -> y(\tau, \beta |y) = cP(\tau, \beta) \alpha(\tau, \beta, y)\\
+P(\tau, \beta) = P_1 \tau, \beta) P_2(\tau) \\
+\beta|\tau \sim N_{p-1}(\psi \tau^{-1} V) \\
+\tau \sim G(\alpha, \sigma)  \\
+\alpha(y|\beta, \tau) = \prod_i \frac{1}{(2 \pi)^{p/2} det(I \tau)^{1/2}} 
+\exp(-\frac{1}{2}(y-X\beta)' (I \tau)^{-1} (y-X\beta))  \\
+\propto (\tau^n)^{n/2} \exp(-\frac{\tau}{2}(y-X\beta)'  (y-X\beta))  \\
+P_2(\tau) = \frac{\sigma^\alpha}{\Gamma(\alpha)} \tau^{(\alpha-1)} \exp(-\sigma \tau) \\ 
+\propto  \tau^{(\alpha-1)} \exp(-\sigma \tau) \\ 
+P_1(\beta|\tau) = \frac{1}{(2 \pi)^{\frac{k+1}{2}} det(\Sigma)^{1/2}} 
+\exp(\tau (\beta-\psi)' V^{-1} (\beta-\psi))  \\
+\propto \tau^{\frac{k+1}{2}} 
+\exp(\tau (\beta-\psi)' V^{-1} (\beta-\psi))  \\
+P() \propto P_1 P2 \propto \tau^{\frac{k+1}{2}} + \frac{2(\alpha-1)}{2} \exp(\tau (1/2\beta-\psi)' V^{-1} (\beta-\psi)) 
+\end{align*}
+
+
+
+
+
+
+\end{document}
