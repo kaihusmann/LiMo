@@ -142,25 +142,53 @@ $p(\lambda | y)$ hat die Form einer Gamma Verteilung mit $a=a+\sum y_i4$ und $b=
 \textbf{6} see page 284\\
 
 \begin{align*}
-u(\tau | y) -> y(\tau, \beta |y) = cP(\tau, \beta) \alpha(\tau, \beta, y)\\
-P(\tau, \beta) = P_1 \tau, \beta) P_2(\tau) \\
-\beta|\tau \sim N_{p-1}(\psi \tau^{-1} V) \\
-\tau \sim G(\alpha, \sigma)  \\
-\alpha(y|\beta, \tau) = \prod_i \frac{1}{(2 \pi)^{p/2} det(I \tau)^{1/2}} 
-\exp(-\frac{1}{2}(y-X\beta)' (I \tau)^{-1} (y-X\beta))  \\
-\propto (\tau^n)^{n/2} \exp(-\frac{\tau}{2}(y-X\beta)'  (y-X\beta))  \\
-P_2(\tau) = \frac{\sigma^\alpha}{\Gamma(\alpha)} \tau^{(\alpha-1)} \exp(-\sigma \tau) \\ 
-\propto  \tau^{(\alpha-1)} \exp(-\sigma \tau) \\ 
-P_1(\beta|\tau) = \frac{1}{(2 \pi)^{\frac{k+1}{2}} det(\Sigma)^{1/2}} 
-\exp(\tau (\beta-\psi)' V^{-1} (\beta-\psi))  \\
-\propto \tau^{\frac{k+1}{2}} 
-\exp(\tau (\beta-\psi)' V^{-1} (\beta-\psi))  \\
-P() \propto P_1 P2 \propto \tau^{\frac{k+1}{2}} + \frac{2(\alpha-1)}{2} \exp(\tau (1/2\beta-\psi)' V^{-1} (\beta-\psi)) 
+u(\tau | y) \rightarrow y(\tau, \beta |y) &= cP(\tau, \beta) L(\tau, \beta| y)\\
+P(\tau, \beta) &= P_1 \tau|\beta) P_2(\tau)\\
+\text{where} \quad \beta|\tau \sim N_{p+1}(\psi \tau^{-1} V) \quad \text{and} \quad
+\tau \sim G(\alpha, \sigma)\\
 \end{align*}
+\begin{align*}
+L(y|\beta, \tau) &= \prod_i \frac{1}{(2 \pi)^{p/2} det(\tau^{-1}I)} \frac{1}{2} \exp(-\frac{1}{2}(y-X\beta)' (\tau I) (y-X\beta))\\
+&\propto (\tau^n)^{1/2} \exp(-\frac{\tau}{2}(y-X\mu)'  (y-X\beta))\\
+\end{align*}
+\begin{align*}
+P_2(\tau) &= \frac{\sigma^\alpha}{\Gamma(\alpha)} \tau^{(\alpha-1)} \exp(-\sigma \tau)\\ 
+&\propto  \tau^{(\alpha-1)} \exp(-\sigma \tau)\\
+\end{align*}
+\begin{align*}
+P_1(\beta|\tau) &= \frac{1}{(2 \pi)^{\frac{k+1}{2}} det(\Sigma)^{1/2}} 
+\exp(\tau (\beta-\psi)' V^{-1} \frac{(\beta-\psi)}{2})\\
+&\propto \tau^{\frac{k+1}{2}}\exp(-\tau (\beta-\psi)' V^{-1} \frac{(\beta-\psi)}{2})\\
+\end{align*}
+\begin{align*}
+P(\beta, \tau) &\propto P_1 P_2\\
+&\propto \tau^{\frac{k+1}{2}} + \frac{2(\alpha-1)}{2} \exp(\frac{-\tau(\beta-\psi)'V^{-1}(\beta-\psi)}{2}-\frac{2 \sigma \tau}{2})\\
+\end{align*}
+\begin{align*}
+y(\tau,\beta|y)&=P(\beta,\tau)L(\tau,\beta|y)\\
+&\propto \tau^{\frac{k+1+\alpha+n}{2}}exp(-\frac{\tau}{2}[\beta \psi'V^{-1}(\beta-\psi)+2 \sigma + (y-X\beta)'(y-X\beta)])\\
+\end{align*}
+$\rightarrow$ post. Verteilung $G(\beta, \tau|y)$\\
 
+$c_1$ [in (11.9) auf Seite 281] $=\frac{1}{2 \pi^{\frac{k+1}{2}}}$\\
 
+$c_2$ [in(11.10)] $=c_1 \frac{1}{2 \pi^{\frac{n}{2}}}$\\
+\begin{align*}
+\delta_{*} \text{[in(11.14)]} &=2\delta\\
+\alpha_{**} \text{[in(11.14)]} &=2\alpha-2+n\\
+\delta_{**} \text{[in(11.14)]} &=-\psi'_*V^{-1}_*+\psi V^{-1} \psi \dots \\
+\end{align*}
+Die Konstandten die zuvor weggelassen wurden muessen jetzt multiplikativ hinzugefügt werden, da das Integral der Dicht ansonsten nicht 1 ergeben wuerde.\\
+$c_5$ [in(11.14)] $=c_2 |V_*|^{1/2} *(2\pi)^{\frac{k+1}{2}}$\\
 
-
-
+\textbf{5b} Change of Variable technique\\
+\begin{align*}
+(\sigma^2|y) &= v(\tau|y)|\frac{d \tau}{d \sigma^2}|\\
+&= v(\frac{1}{\sigma^2}|y)*\frac{1}{\sigma^4}\\
+&=c_5(\frac{1}{\sigma^2 })^{\frac{\alpha+n}{2}-1}\frac{1}{\sigma^4}-exp\left(-\left[\left(\frac{-\psi'_* V^{-1}_* \psi_* + \psi' V^{-1} \psi + y'y+2 \psi}{2}\right) \right] \frac{1}{\sigma^2} \right)\\
+&=c_5(\sigma^2)^{-\left(\frac{\alpha+n}{2}-1\right)-2}exp\left(\dots\right)\\
+&=c_5(\sigma^2)^{-\frac{\alpha+n}{2}+1-2}exp\left(\dots\right)\\
+&=c_5(\sigma^2)^{-\frac{\alpha+n}{2-1}}exp\left(\dots\right)\\
+\end{align*}
 
 \end{document}
